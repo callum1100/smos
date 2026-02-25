@@ -5,7 +5,7 @@ const SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "dev-secret-change-in-production-min-32-chars!"
 );
 
-const PUBLIC_PATHS = ["/", "/api/auth/send-magic-link", "/api/auth/verify"];
+const PUBLIC_PATHS = ["/", "/api/auth/send-magic-link", "/api/auth/verify", "/api/auth/dev-login"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
