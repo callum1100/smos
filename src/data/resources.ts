@@ -322,20 +322,93 @@ export const resources: Resource[] = [
     loomUrl: "https://www.loom.com/share/0dddfd9ddc9d495393b37cea5edd7d3c",
   },
   {
-    id: "virgile-fundamentals",
-    title: "Fundamentals",
-    description: "Essential foundations — do this before writing ANY copy",
-    type: "course",
+    id: "virgile-before-writing",
+    title: "Do This Before Writing ANY Copy",
+    description: "The copywriting foundations checklist — fill this out for every client before writing a single word",
+    type: "loom_video",
     contributor: "virgile",
     category: "copywriting",
-    icon: "📚",
+    icon: "📋",
     color: "purple",
     status: "active",
-    loomUrls: [
-      { title: "Do This Before Writing ANY Copy", url: "#" },
-      { title: "Brand Sheets", url: "#" },
-      { title: "Setting up the AI Project (Claude.ai)", url: "#" },
-    ],
+    loomUrl: "https://www.loom.com/share/1cdfe225fa93428b80cb86747f19e8c7",
+    content: `# Do This Before Writing Any Piece Of Copy
+(for your clients)
+
+## 1. Fill out: The Latent Conditions Deck
+
+### What is the awareness level of the person reading this?
+
+### What is the sophistication level of your niche/market?
+
+**X-axis:** Time, amount of competition, quality of buying experiences
+**Y-axis:** Level of market sophistication (prospect skepticism)
+**Core idea:** As competition increases over time, prospect skepticism rises with it
+
+**Level 1: Birth of Market**
+Any claim works. Market is fresh, no competition, no burned prospects.
+Example: "Sign 2-3 copywriting clients in 90 days" — Simple claim. No proof needed.
+
+**Level 2: Bigger Claims**
+Skepticism has increased slightly. Must make claim BIGGER than competition.
+Example: "Sign 5-10 clients in 60 days" — You're competing on size of promise now.
+
+**Level 3: Introduce a Mechanism**
+More time passed, more competition, higher skepticism. Now need a LOGICAL REASON why your claim is achievable. Add the "how" — a mechanism.
+Example: "Sign 5-10 clients using my two-step outreach method in 60 days"
+
+**Level 4: Better/Upgraded Mechanism**
+Must create superior version of existing mechanisms. Use Hormozi's Value Equation to upgrade:
+- Increase tangibility of the desired outcome
+- Increase perceived likelihood of achievement
+- Decrease time delay
+- Decrease effort and sacrifice
+Example: "Sign 5-10 clients using my automated AI outreach system in 60 days"
+
+**Level 5: Maximum Skepticism**
+Final level — skepticism at peak. Prospects no longer believe ANY mechanism. They've been burned too many times.
+**Solution: Introduce a Problem Mechanism.** Reveal a NEW, deeper root cause of their problem. Show why all other mechanisms/solutions fail. Position your solution as the ONLY one that addresses this root cause.
+
+## 2. Fill out your "Big Belief" Statement
+
+If I can make people believe that **(my new opportunity)** is key to **(what they desire most)** and is only attainable through **(my specific vehicle)**, then all objections become irrelevant and they will invest.
+
+Watch for more context: Understanding The New Opportunity coaching call
+
+## 3. What is the chain of beliefs you need to take them through?
+
+Watch call recording for more context: The Belief Chain coaching call
+
+## 4. List your niche's trigger words
+
+($10,000/month, financial freedom, etc.)
+Watch for more context: Marketing Angles coaching call
+
+## 5. Fill out: VSL Foundations Template`,
+  },
+  {
+    id: "virgile-brand-sheets",
+    title: "Brand Sheets",
+    description: "ICP Brand Sheet template — define your client's ideal customer profile",
+    type: "loom_video",
+    contributor: "virgile",
+    category: "copywriting",
+    icon: "📄",
+    color: "purple",
+    status: "active",
+    loomUrl: "https://www.loom.com/share/547f409baf5f4035b9fc1680ac71869b",
+  },
+  {
+    id: "virgile-ai-setup",
+    title: "Setting up the AI Project (Claude.ai)",
+    description: "How to set up your AI copywriting assistant in Claude",
+    type: "loom_video",
+    contributor: "virgile",
+    category: "copywriting",
+    icon: "🤖",
+    color: "purple",
+    status: "active",
+    loomUrl: "#",
   },
   {
     id: "virgile-vsl-funnels",
