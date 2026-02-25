@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// For local development, use SQLite.
+// For Vercel deployment, change to:
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("member") // admin | member
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tickets   Ticket[]
+  submissions Submission[]
+}
+
+model Ticket {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        String   // copy_review | tech_support
+  status      String   @default("open") // open | in_progress | resolved | closed
+  priority    String   @default("normal") // low | normal | high | urgent
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  responses   TicketResponse[]
+}
+
+model TicketResponse {
+  id        String   @id @default(cuid())
+  content   String
+  author    String   // name or email of responder
+  createdAt DateTime @default(now())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  type      String   // weekly_call | rep_hiring
+  data      String   // JSON string of form fields
+  status    String   @default("pending") // pending | reviewed | approved | rejected
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
