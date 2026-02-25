@@ -2,8 +2,24 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2, Info } from "lucide-react";
 import Link from "next/link";
+
+const copyReviewGuidelines = {
+  title: "How to submit a copy review",
+  rules: [
+    "You have watched the copywriting modules specific to the piece of copy you have written",
+    "You have completed your client's copywriting foundations checklist (check \"Do This Before Writing ANY Copy\" module for more context)",
+    "You have fully drafted out a piece of copy",
+  ],
+  steps: [
+    "Give your review a clear title (e.g. \"VSL Script — [Client Name]\")",
+    "Describe what you've written and what you'd like feedback on specifically",
+    "Record a quick 2–5 min Loom going through what it is you've written and what you'd like feedback on",
+    "Provide your copywriting foundations checklist doc for that specific client",
+    "Provide the doc you wrote the copy on (Google Doc, Notion, etc.)",
+  ],
+};
 
 export default function NewTicketPage() {
   const router = useRouter();
@@ -17,6 +33,8 @@ export default function NewTicketPage() {
   const [docUrl, setDocUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const isCopyReview = type === "copy_review";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -55,11 +73,45 @@ export default function NewTicketPage() {
       </Link>
 
       <div>
-        <h1 className="text-2xl font-bold text-white">New Ticket</h1>
+        <h1 className="text-2xl font-bold text-white">
+          {isCopyReview ? "Copy Review" : "New Ticket"}
+        </h1>
         <p className="text-sm text-zinc-500 mt-1">
-          Submit a request for copy review or tech support
+          {isCopyReview
+            ? "Submit a piece of copy you'd like Virgile to review"
+            : "Submit a request for tech support"}
         </p>
       </div>
+
+      {/* Copy Review Guidelines */}
+      {isCopyReview && (
+        <div className="bg-purple-950/20 rounded-xl border border-purple-900/40 p-5 space-y-4">
+          <div className="flex items-center gap-2 text-purple-400">
+            <Info className="w-4 h-4" />
+            <h3 className="text-sm font-semibold">Before submitting</h3>
+          </div>
+          <p className="text-sm text-zinc-400">Only submit a copy review when:</p>
+          <ul className="space-y-2">
+            {copyReviewGuidelines.rules.map((rule, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-zinc-300">
+                <span className="text-purple-400 mt-0.5">✓</span>
+                {rule}
+              </li>
+            ))}
+          </ul>
+          <div className="border-t border-purple-900/40 pt-3 mt-3">
+            <p className="text-sm text-zinc-400 mb-2">How to submit:</p>
+            <ol className="space-y-1.5">
+              {copyReviewGuidelines.steps.map((step, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-zinc-300">
+                  <span className="text-purple-400 font-semibold text-xs mt-0.5 w-4 shrink-0">{i + 1}.</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      )}
 
       <form
         onSubmit={handleSubmit}
@@ -81,13 +133,13 @@ export default function NewTicketPage() {
 
         <div>
           <label className="block text-sm font-medium text-zinc-300 mb-1.5">
-            Title
+            Title <span className="text-red-400">*</span>
           </label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Brief summary of your request"
+            placeholder={isCopyReview ? 'e.g. "VSL Script — Client Name"' : "Brief summary of your request"}
             required
             className="input-premium"
           />
@@ -95,12 +147,14 @@ export default function NewTicketPage() {
 
         <div>
           <label className="block text-sm font-medium text-zinc-300 mb-1.5">
-            Description
+            Description <span className="text-red-400">*</span>
           </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Provide details about your request..."
+            placeholder={isCopyReview
+              ? "What have you written? What would you like feedback on specifically?"
+              : "Provide details about your request..."}
             required
             className="textarea-premium"
           />
@@ -108,7 +162,9 @@ export default function NewTicketPage() {
 
         <div>
           <label className="block text-sm font-medium text-zinc-300 mb-1.5">
-            Loom URL <span className="text-zinc-600 font-normal">(optional)</span>
+            Loom URL {isCopyReview
+              ? <span className="text-zinc-500 font-normal">(2–5 min walkthrough)</span>
+              : <span className="text-zinc-600 font-normal">(optional)</span>}
           </label>
           <input
             type="url"
@@ -121,7 +177,9 @@ export default function NewTicketPage() {
 
         <div>
           <label className="block text-sm font-medium text-zinc-300 mb-1.5">
-            Document / Copy Link <span className="text-zinc-600 font-normal">(optional)</span>
+            Document / Copy Link {isCopyReview
+              ? <span className="text-zinc-500 font-normal">(the doc you wrote the copy on)</span>
+              : <span className="text-zinc-600 font-normal">(optional)</span>}
           </label>
           <input
             type="url"
@@ -144,7 +202,7 @@ export default function NewTicketPage() {
           className="btn-primary w-full flex items-center justify-center gap-2"
         >
           {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-          {loading ? "Submitting..." : "Submit Ticket"}
+          {loading ? "Submitting..." : isCopyReview ? "Submit for Review" : "Submit Ticket"}
         </button>
       </form>
     </div>
