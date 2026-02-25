@@ -22,6 +22,6 @@ export async function GET(request: Request) {
 
   await createSession(email);
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  return NextResponse.redirect(`${appUrl}/dashboard`);
+  const url = new URL(request.url);
+  return NextResponse.redirect(`${url.origin}/dashboard`);
 }
