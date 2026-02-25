@@ -389,7 +389,7 @@ Watch for more context: Marketing Angles coaching call
   {
     id: "virgile-brand-sheets",
     title: "Brand Sheets",
-    description: "ICP Brand Sheet template — define your client's ideal customer profile",
+    description: "ICP, New Opportunity, and Offer Breakdown brand sheet templates",
     type: "loom_video",
     contributor: "virgile",
     category: "copywriting",
@@ -397,6 +397,116 @@ Watch for more context: Marketing Angles coaching call
     color: "purple",
     status: "active",
     loomUrl: "https://www.loom.com/share/547f409baf5f4035b9fc1680ac71869b",
+    content: `# ICP Brand Sheet
+
+## ICP Breakdown
+**Important: Go into detail**
+These are your fans, which is what your brand is going to attract — they have the same characteristics, goals, values and resonate with you.
+
+### Dream Follower
+- Who are they, what's their story, what do they look like?
+- What are they passionate about?
+- What are their goals, dreams, and desires?
+- What are their deepest fears?
+- What are their struggles?
+
+*Within your fanbase these are the people that you are selling to and that you want to buy.*
+
+### ICP (Ideal Customer Profile)
+- How much are they making?
+- What business/service are they providing?
+- Current situation
+- Desired outcome
+- Perceived problems
+- What makes a customer a bad fit?
+- What limiting beliefs does your ICP have?
+
+---
+
+# New Opportunity Brand Sheet
+
+## New Opportunity Breakdown
+**Have Client Fill Out (onboarding call / questionnaire):**
+
+**Important: Go into detail**
+
+- Describe one shocking or highly emotional moment on your journey (date, place, who was present).
+- Paint a picture of your daily life before chasing today's result (job, income, routine).
+- State the external goal you were pursuing and the internal fears you felt then.
+- What specific obstacle — or "wall" — proved your old approach was broken?
+- How did that failure impact your finances, relationships, or self-worth? (Give concrete examples.)
+- Where were you when the breakthrough occurred, and who or what triggered it?
+- In one sentence, describe the New Opportunity you saw.
+- List the first three actions you took immediately after that aha moment.
+- What major conflicts did you face after committing to the new path?
+- What measurable result did you finally achieve? (Numbers, time saved, etc.)
+- What internal transformation did you experience (identity shift, confidence boost, outlook)?
+- Skills you've mastered (rank your top three).
+- Do you already use frameworks, checklists?
+- In one sentence, what future do you want your audience to experience? (The Goal)
+- Why does that matter to you personally?
+- Five years from now, describe the movement you hope to lead in a tweet-length sentence.
+- What old way(s) of doing things frustrate you most in your niche?
+- List 3 common myths holding people back.
+- What tools / programs / gurus are folks currently using that leave them stuck?
+- From your perspective, why do those vehicles fail?
+- Single biggest outcome you want your students/clients to achieve (make it concrete: money, time, health, etc.)
+- Time horizon you believe is realistic for that outcome (days, weeks, months).
+- Key milestones between day 1 and the outcome (bullet them).
+- Non-negotiables your program would require from clients (daily actions, tools, mindset).
+
+---
+
+# Offer Breakdown Brand Sheet
+
+## Offer Breakdown
+- Who does your business sell to?
+- Dream Followers / Students
+- What is your offer?
+- How much do you make MRR?
+- What case-studies do you have?
+- What do you promise your customers?
+
+---
+
+# Voice Kit (EXTRA)
+
+Collect these transcripts to build your brand voice:
+- Onboarding call transcripts
+- Long-form content transcripts
+- Short-form content transcripts
+
+---
+
+# Experience Vault (EXTRA)
+
+Use this page to build your personal bank of content ideas pulled from your unique knowledge and story — not trends.
+
+## Why This Matters
+You're not here to copy. You're here to clarify. This is how you:
+- Build trust with real substance
+- Teach from conviction, not theory
+- Turn what's in your head into scalable, value-packed content
+
+## Category 1: Experience
+These are the defining moments that shaped you.
+**Prompt:** "I remember when I…" → What changed?
+
+## Category 2: Lessons
+Failures and wins that taught you something important.
+**Prompt:** "I used to do ___ — now I do ___."
+
+## Category 3: Frameworks
+Repeatable systems or methods you use that work.
+**Prompt:** "Here's my 3-step system for ___."
+
+## Category 4: Principles
+The rules you live and build by — what never changes.
+**Prompt:** "If x is what you want then one thing I always live by as a [title] is…"
+
+## Category 5: Beliefs
+What you believe about your industry, your clients, and your mission.
+**Prompt:** "Most people think ___ — I believe ___."`,
   },
   {
     id: "virgile-ai-setup",
