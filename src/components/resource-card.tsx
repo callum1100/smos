@@ -40,10 +40,10 @@ const colorGradients: Record<string, string> = {
 };
 
 const colorAccents: Record<string, string> = {
-  orange: "bg-orange-50 text-orange-600 ring-orange-200",
-  blue: "bg-blue-50 text-blue-600 ring-blue-200",
-  purple: "bg-purple-50 text-purple-600 ring-purple-200",
-  green: "bg-emerald-50 text-emerald-600 ring-emerald-200",
+  orange: "bg-orange-950/50 text-orange-400 ring-orange-800",
+  blue: "bg-blue-950/50 text-blue-400 ring-blue-800",
+  purple: "bg-purple-950/50 text-purple-400 ring-purple-800",
+  green: "bg-emerald-950/50 text-emerald-400 ring-emerald-800",
 };
 
 function getHref(resource: Resource): string {
@@ -65,7 +65,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
   const isExternal = resource.type === "external_link" && resource.url !== "#";
 
   const card = (
-    <div className="card-premium overflow-hidden h-full flex flex-col">
+    <div className="card-premium overflow-hidden h-full flex flex-col group">
       {/* Gradient header strip */}
       <div
         className={cn(
@@ -90,7 +90,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
         </div>
 
         {/* Title */}
-        <h3 className="font-semibold text-zinc-900 mb-1.5 group-hover:text-indigo-600 transition-colors">
+        <h3 className="font-semibold text-white mb-1.5 group-hover:text-indigo-400 transition-colors">
           {resource.title}
         </h3>
 
@@ -118,7 +118,7 @@ export function ResourceCard({ resource }: { resource: Resource }) {
         )}
 
         {/* Hover arrow */}
-        <div className="mt-4 flex items-center text-sm font-medium text-zinc-400 group-hover:text-indigo-500 transition-colors">
+        <div className="mt-4 flex items-center text-sm font-medium text-zinc-500 group-hover:text-indigo-400 transition-colors">
           <span>
             {resource.type === "external_link"
               ? "Open"

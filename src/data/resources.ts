@@ -7,7 +7,7 @@ export type ResourceType =
   | "submission_form"
   | "course";
 
-export type Contributor = "andres" | "rene" | "virgile" | "backend";
+export type Contributor = "andres" | "rene" | "virgile" | "callum";
 
 export type Category =
   | "sales"
@@ -31,13 +31,12 @@ export interface Resource {
   icon: string;
   color: string;
   status: ResourceStatus;
-  // Type-specific fields
-  url?: string; // For external_link, download
-  loomUrl?: string; // For loom_video
-  loomUrls?: { title: string; url: string }[]; // For course (multiple videos)
-  content?: string; // For document (markdown content)
-  ticketType?: string; // For ticket_system
-  formType?: string; // For submission_form
+  url?: string;
+  loomUrl?: string;
+  loomUrls?: { title: string; url: string; section?: string }[];
+  content?: string;
+  ticketType?: string;
+  formType?: string;
 }
 
 export interface ContributorInfo {
@@ -54,28 +53,28 @@ export const contributors: ContributorInfo[] = [
     name: "Andres",
     role: "Sales & Funnels",
     icon: "🎯",
-    color: "bg-orange-50 border-orange-200 text-orange-700",
+    color: "bg-orange-950/50 border-orange-800 text-orange-400",
   },
   {
     id: "rene",
     name: "Rene",
     role: "Outreach & Lead Gen",
     icon: "📡",
-    color: "bg-blue-50 border-blue-200 text-blue-700",
+    color: "bg-blue-950/50 border-blue-800 text-blue-400",
   },
   {
     id: "virgile",
     name: "Virgile",
     role: "Copywriting",
     icon: "✍️",
-    color: "bg-purple-50 border-purple-200 text-purple-700",
+    color: "bg-purple-950/50 border-purple-800 text-purple-400",
   },
   {
-    id: "backend",
-    name: "Tech & Backend",
-    role: "Systems & Automation",
+    id: "callum",
+    name: "Callum",
+    role: "Tech & Backend",
     icon: "⚙️",
-    color: "bg-green-50 border-green-200 text-green-700",
+    color: "bg-green-950/50 border-green-800 text-green-400",
   },
 ];
 
@@ -91,7 +90,7 @@ export const resources: Resource[] = [
     icon: "📅",
     color: "orange",
     status: "active",
-    url: "#", // Replace with actual calendar link
+    url: "#",
   },
   {
     id: "andres-roadmap",
@@ -103,8 +102,7 @@ export const resources: Resource[] = [
     icon: "🗺️",
     color: "orange",
     status: "active",
-    content:
-      "# Custom Roadmap\n\nThis roadmap will be customized for your specific needs. Content coming soon.",
+    content: "# Custom Roadmap\n\nThis roadmap will be customized for your specific needs. Content coming soon.",
   },
   {
     id: "andres-funnels-walkthrough",
@@ -116,7 +114,7 @@ export const resources: Resource[] = [
     icon: "🎬",
     color: "orange",
     status: "active",
-    loomUrl: "#", // Replace with actual Loom URL
+    loomUrl: "#",
   },
   {
     id: "andres-webinar-funnels",
@@ -128,7 +126,7 @@ export const resources: Resource[] = [
     icon: "🎪",
     color: "orange",
     status: "active",
-    loomUrl: "#", // Replace with actual Loom URL
+    loomUrl: "#",
   },
   {
     id: "andres-funnels-directory",
@@ -176,7 +174,7 @@ export const resources: Resource[] = [
     icon: "🎥",
     color: "orange",
     status: "active",
-    loomUrl: "#", // Replace with actual Loom URL
+    loomUrl: "#",
   },
   {
     id: "andres-content-sop",
@@ -226,7 +224,7 @@ export const resources: Resource[] = [
     icon: "📞",
     color: "blue",
     status: "active",
-    url: "#", // Replace with actual booking link
+    url: "#",
   },
   {
     id: "rene-crm",
@@ -238,7 +236,7 @@ export const resources: Resource[] = [
     icon: "📊",
     color: "blue",
     status: "active",
-    url: "#", // Replace with Airtable/Google Sheet link
+    url: "#",
   },
   {
     id: "rene-lead-scraper",
@@ -250,7 +248,7 @@ export const resources: Resource[] = [
     icon: "🔍",
     color: "blue",
     status: "in_progress",
-    url: "#", // Replace with Airtable link
+    url: "#",
   },
   {
     id: "rene-dm-playbook",
@@ -262,7 +260,7 @@ export const resources: Resource[] = [
     icon: "💬",
     color: "blue",
     status: "active",
-    loomUrl: "#", // Replace with actual Loom URL
+    loomUrl: "#",
   },
   {
     id: "rene-voice-note",
@@ -285,7 +283,7 @@ export const resources: Resource[] = [
   {
     id: "virgile-copy-reviews",
     title: "Copy Reviews on Demand",
-    description: "Submit your copy for expert review and feedback",
+    description: "Submit your copy for expert review and feedback from Virgile",
     type: "ticket_system",
     contributor: "virgile",
     category: "copywriting",
@@ -295,26 +293,8 @@ export const resources: Resource[] = [
     ticketType: "copy_review",
   },
   {
-    id: "virgile-copywriting-course",
-    title: "Full Copywriting Course",
-    description: "Complete copywriting course with Loom video lessons",
-    type: "course",
-    contributor: "virgile",
-    category: "copywriting",
-    icon: "🎓",
-    color: "purple",
-    status: "active",
-    loomUrls: [
-      { title: "Module 1: Copywriting Fundamentals", url: "#" },
-      { title: "Module 2: Headlines & Hooks", url: "#" },
-      { title: "Module 3: Sales Pages", url: "#" },
-      { title: "Module 4: Email Sequences", url: "#" },
-      { title: "Module 5: Ad Copy", url: "#" },
-    ],
-  },
-  {
     id: "virgile-ai-library",
-    title: "AI Copper & Library",
+    title: "AI Prompts & Library",
     description: "Downloadable AI copywriting tools and prompt library",
     type: "download",
     contributor: "virgile",
@@ -322,28 +302,88 @@ export const resources: Resource[] = [
     icon: "🤖",
     color: "purple",
     status: "active",
-    url: "#", // Replace with download link
+    url: "#",
+  },
+  {
+    id: "virgile-copywriting-course",
+    title: "Full Copywriting Course",
+    description: "Complete copywriting course — from fundamentals to advanced frameworks",
+    type: "course",
+    contributor: "virgile",
+    category: "copywriting",
+    icon: "🎓",
+    color: "purple",
+    status: "active",
+    loomUrls: [
+      // Start Here
+      { title: "Start Here", url: "https://www.loom.com/share/0dddfd9ddc9d495393b37cea5edd7d3c", section: "Start Here" },
+      // Fundamentals
+      { title: "Do This Before Writing ANY Copy", url: "#", section: "Fundamentals" },
+      { title: "Brand Sheets", url: "#", section: "Fundamentals" },
+      { title: "Setting up the AI Project (Claude.ai)", url: "#", section: "Fundamentals" },
+      // VSL Funnels
+      { title: "Ideating VSL's", url: "#", section: "VSL Funnels" },
+      { title: "Scripting VSL's", url: "#", section: "VSL Funnels" },
+      { title: "Iterating VSL's", url: "#", section: "VSL Funnels" },
+      { title: "Typeform Questions", url: "#", section: "VSL Funnels" },
+      { title: "Post Call Page", url: "#", section: "VSL Funnels" },
+      // Email Sequences
+      { title: "Welcome Sequence", url: "#", section: "Email Sequences" },
+      { title: "Pre Call Emails", url: "#", section: "Email Sequences" },
+      { title: "No Show + No Close", url: "#", section: "Email Sequences" },
+      { title: "Bonuses", url: "#", section: "Email Sequences" },
+      { title: "Nurture Campaign", url: "#", section: "Email Sequences" },
+      { title: "Partial Submissions (Typeform)", url: "#", section: "Email Sequences" },
+      { title: "Iterating Emails", url: "#", section: "Email Sequences" },
+      // Webinars
+      { title: "Jason Fladlien Webinar Framework (Strategy)", url: "#", section: "Webinars" },
+      { title: "Scripting Webinars", url: "#", section: "Webinars" },
+      { title: "Iterating Webinar Scripts", url: "#", section: "Webinars" },
+      // IG Story Sequences
+      { title: "LIVE: Writing An IG Story Sequence", url: "#", section: "IG Story Sequences" },
+      { title: "4 Most Important Story Sequences (for coaching offers)", url: "#", section: "IG Story Sequences" },
+    ],
+  },
+  {
+    id: "virgile-coaching-calls",
+    title: "Coaching Calls",
+    description: "Live coaching calls covering the most important persuasion principles for high-converting copy",
+    type: "course",
+    contributor: "virgile",
+    category: "copywriting",
+    icon: "📞",
+    color: "purple",
+    status: "active",
+    loomUrls: [
+      { title: "Understanding The New Opportunity — 28 Dec 2025", url: "https://www.loom.com/share/4efd831b2657495bae275d37ad1e4a85" },
+      { title: "Marketing Angles — 1 Jan 2026", url: "https://www.loom.com/share/d392b11cbe85490b82a355c32762c215" },
+      { title: "The Belief Chain — 8 Jan 2026", url: "#" },
+      { title: "Writing Scroll Stopping Hooks — 15 Jan 2026", url: "https://www.loom.com/share/60bfd5155379427793467fa7c93034c9" },
+      { title: "The Art of Storyselling — 22 Jan 2026", url: "https://www.loom.com/share/34621a1d6bb04809adc6897db5e10345" },
+      { title: "Becoming a Master of Pain — 2 Apr 2026", url: "https://www.loom.com/share/44838ad719624712a5e8136c59bab21a" },
+      { title: "Copywriting First Principles — 12 Feb 2026", url: "https://www.loom.com/share/faeccbb677364bab8e2e12393859a84d" },
+    ],
   },
 
-  // ── Backend/Tech Resources ───────────────────────────────────────
+  // ── Callum's Resources (Tech & Backend) ────────────────────────
   {
-    id: "backend-booking",
+    id: "callum-booking",
     title: "Biweekly One-on-One Call",
     description: "Book your biweekly technical call",
     type: "external_link",
-    contributor: "backend",
+    contributor: "callum",
     category: "backend",
     icon: "📅",
     color: "green",
     status: "active",
-    url: "#", // Replace with actual booking link
+    url: "#",
   },
   {
-    id: "backend-tech-support",
+    id: "callum-tech-support",
     title: "Ongoing Tech Support",
     description: "Submit technical support requests and track progress",
     type: "ticket_system",
-    contributor: "backend",
+    contributor: "callum",
     category: "backend",
     icon: "🎫",
     color: "green",
@@ -351,11 +391,11 @@ export const resources: Resource[] = [
     ticketType: "tech_support",
   },
   {
-    id: "backend-sip-architect",
+    id: "callum-sip-architect",
     title: "SIP Architect Bot Hiring & Delegation",
     description: "Playbook template for hiring and delegating with SIP architect bots",
     type: "document",
-    contributor: "backend",
+    contributor: "callum",
     category: "hiring",
     icon: "🏗️",
     color: "green",
@@ -363,11 +403,11 @@ export const resources: Resource[] = [
     content: "# SIP Architect Bot Hiring & Delegation\n\nPlaybook template. Content to be added.",
   },
   {
-    id: "backend-data-tracking",
+    id: "callum-data-tracking",
     title: "Full Data Tracking System",
     description: "Complete backend data tracking system course with Loom videos",
     type: "course",
-    contributor: "backend",
+    contributor: "callum",
     category: "backend",
     icon: "📈",
     color: "green",
@@ -379,23 +419,23 @@ export const resources: Resource[] = [
     ],
   },
   {
-    id: "backend-automations",
+    id: "callum-automations",
     title: "Automations Tracking Training",
     description: "Training on setting up and monitoring automation workflows",
     type: "loom_video",
-    contributor: "backend",
+    contributor: "callum",
     category: "backend",
     icon: "⚡",
     color: "green",
     status: "active",
-    loomUrl: "#", // Replace with actual Loom URL
+    loomUrl: "#",
   },
   {
-    id: "backend-client-success",
+    id: "callum-client-success",
     title: "Client Success Builds & Backend Upselling",
     description: "Strategies for client success builds and backend upselling",
     type: "document",
-    contributor: "backend",
+    contributor: "callum",
     category: "backend",
     icon: "🚀",
     color: "green",
@@ -403,11 +443,11 @@ export const resources: Resource[] = [
     content: "# Client Success Builds & Backend Upselling\n\nStrategies and playbooks. Content to be added.",
   },
   {
-    id: "backend-tech-walkthroughs",
+    id: "callum-tech-walkthroughs",
     title: "Full Tech Walkthroughs & Trainings",
     description: "Comprehensive technical walkthroughs and training sessions",
     type: "course",
-    contributor: "backend",
+    contributor: "callum",
     category: "training",
     icon: "🖥️",
     color: "green",
@@ -419,11 +459,11 @@ export const resources: Resource[] = [
     ],
   },
   {
-    id: "backend-lovable-prompts",
+    id: "callum-lovable-prompts",
     title: "Lovable Prompts & Support Module",
     description: "Prompts library and support resources for Lovable",
     type: "document",
-    contributor: "backend",
+    contributor: "callum",
     category: "tools",
     icon: "💡",
     color: "green",
@@ -431,11 +471,11 @@ export const resources: Resource[] = [
     content: "# Lovable Prompts & Support Module\n\nPrompt library and support resources. Content to be added.",
   },
   {
-    id: "backend-microsoft",
+    id: "callum-microsoft",
     title: "Microsoft Usage in Business Operations",
     description: "Guide to leveraging Microsoft tools for business operations",
     type: "document",
-    contributor: "backend",
+    contributor: "callum",
     category: "tools",
     icon: "🪟",
     color: "green",

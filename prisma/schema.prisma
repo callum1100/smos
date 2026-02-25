@@ -25,6 +25,8 @@ model Ticket {
   type        String   // copy_review | tech_support
   status      String   @default("open") // open | in_progress | resolved | closed
   priority    String   @default("normal") // low | normal | high | urgent
+  loomUrl     String?
+  docUrl      String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      String
