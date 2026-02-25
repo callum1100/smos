@@ -30,7 +30,7 @@ export default function ResourcesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-zinc-900">All Resources</h1>
+        <h1 className="text-2xl font-bold text-white">All Resources</h1>
         <p className="text-sm text-zinc-500 mt-1">
           Browse and search through all available materials
         </p>
@@ -39,7 +39,7 @@ export default function ResourcesPage() {
       {/* Search and filters */}
       <div className="space-y-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
           <input
             type="text"
             placeholder="Search resources..."
@@ -50,7 +50,7 @@ export default function ResourcesPage() {
           {search && (
             <button
               onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
             >
               <X className="w-4 h-4" />
             </button>
@@ -64,8 +64,8 @@ export default function ResourcesPage() {
             className={cn(
               "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
               selectedCategory === "all"
-                ? "bg-zinc-900 text-white"
-                : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                ? "bg-white text-black"
+                : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800"
             )}
           >
             All Categories
@@ -77,8 +77,8 @@ export default function ResourcesPage() {
               className={cn(
                 "px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1",
                 selectedCategory === cat.id
-                  ? "bg-zinc-900 text-white"
-                  : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                  ? "bg-white text-black"
+                  : "bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800"
               )}
             >
               <span>{cat.icon}</span>
@@ -95,7 +95,7 @@ export default function ResourcesPage() {
               "px-3 py-1.5 rounded-full text-xs font-medium transition-all",
               selectedContributor === "all"
                 ? "bg-indigo-500 text-white"
-                : "bg-indigo-50 text-indigo-600 hover:bg-indigo-100"
+                : "bg-indigo-950/50 text-indigo-400 hover:bg-indigo-950 border border-indigo-900"
             )}
           >
             All Sections
@@ -108,7 +108,7 @@ export default function ResourcesPage() {
                 "px-3 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1",
                 selectedContributor === c.id
                   ? "bg-indigo-500 text-white"
-                  : "bg-indigo-50 text-indigo-600 hover:bg-indigo-100"
+                  : "bg-indigo-950/50 text-indigo-400 hover:bg-indigo-950 border border-indigo-900"
               )}
             >
               <span>{c.icon}</span>
@@ -130,7 +130,7 @@ export default function ResourcesPage() {
         </div>
         {filtered.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-zinc-400">
+            <p className="text-zinc-500">
               No resources match your filters. Try adjusting your search.
             </p>
           </div>

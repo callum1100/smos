@@ -14,12 +14,34 @@ export default async function ResourcePage({
 
   const contributor = contributors.find((c) => c.id === resource.contributor);
 
+  // Group course videos by section if sections exist
+  const groupedVideos: { section: string; videos: { title: string; url: string; index: number }[] }[] = [];
+  if (resource.loomUrls) {
+    let currentSection = "";
+    let globalIndex = 0;
+    for (const video of resource.loomUrls) {
+      const section = (video as { section?: string }).section || "";
+      if (section && section !== currentSection) {
+        currentSection = section;
+        groupedVideos.push({ section, videos: [] });
+      }
+      if (groupedVideos.length === 0) {
+        groupedVideos.push({ section: "", videos: [] });
+      }
+      groupedVideos[groupedVideos.length - 1].videos.push({
+        title: video.title,
+        url: video.url,
+        index: globalIndex++,
+      });
+    }
+  }
+
   return (
     <div className="max-w-4xl space-y-6">
       {/* Breadcrumb */}
       <Link
         href={`/dashboard/section/${resource.contributor}`}
-        className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-white transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to {contributor?.name}&apos;s Resources
@@ -29,10 +51,10 @@ export default async function ResourcePage({
       <div className="flex items-start gap-4">
         <span className="text-4xl">{resource.icon}</span>
         <div>
-          <h1 className="text-2xl font-bold text-zinc-900">{resource.title}</h1>
-          <p className="text-zinc-500 mt-1">{resource.description}</p>
+          <h1 className="text-2xl font-bold text-white">{resource.title}</h1>
+          <p className="text-zinc-400 mt-1">{resource.description}</p>
           {resource.status !== "active" && (
-            <span className="inline-flex items-center gap-1 mt-2 px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-50 text-amber-700 ring-1 ring-amber-200">
+            <span className="inline-flex items-center gap-1 mt-2 px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-950/50 text-amber-400 ring-1 ring-amber-800">
               <AlertCircle className="w-3 h-3" />
               {resource.status === "coming_soon" ? "Coming Soon" : "In Progress"}
             </span>
@@ -41,19 +63,16 @@ export default async function ResourcePage({
       </div>
 
       {/* Content based on type */}
-      <div className="bg-white rounded-xl border border-zinc-200/60 overflow-hidden">
+      <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 overflow-hidden">
         {/* Loom Video */}
         {resource.type === "loom_video" && resource.loomUrl && (
           <div className="protected-content">
             {resource.loomUrl === "#" ? (
-              <div className="flex items-center justify-center h-64 bg-zinc-50 text-zinc-400">
+              <div className="flex items-center justify-center h-64 bg-zinc-900 text-zinc-500">
                 <p>Video URL not yet configured</p>
               </div>
             ) : (
-              <div
-                className="video-protected"
-                onContextMenu={(e: React.MouseEvent) => e.preventDefault()}
-              >
+              <div className="video-protected">
                 <div className="aspect-video">
                   <iframe
                     src={resource.loomUrl.replace("/share/", "/embed/")}
@@ -67,63 +86,70 @@ export default async function ResourcePage({
           </div>
         )}
 
-        {/* Course (multiple videos) */}
+        {/* Course (multiple videos) — with section grouping */}
         {resource.type === "course" && resource.loomUrls && (
-          <div className="protected-content p-6 space-y-4">
-            <h2 className="font-semibold text-zinc-900">Course Modules</h2>
-            <div className="space-y-3">
-              {resource.loomUrls.map((video, i) => (
-                <div
-                  key={i}
-                  className="border border-zinc-200 rounded-lg overflow-hidden"
-                >
-                  <div className="px-4 py-3 bg-zinc-50 flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-indigo-100 text-indigo-600 text-xs font-bold flex items-center justify-center">
-                      {i + 1}
-                    </span>
-                    <span className="font-medium text-sm text-zinc-900">
-                      {video.title}
-                    </span>
+          <div className="protected-content p-6 space-y-6">
+            <h2 className="font-semibold text-white">Course Modules</h2>
+            {groupedVideos.map((group, gi) => (
+              <div key={gi} className="space-y-3">
+                {group.section && (
+                  <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider pt-2 border-t border-zinc-800 first:border-t-0 first:pt-0">
+                    {group.section}
+                  </h3>
+                )}
+                {group.videos.map((video) => (
+                  <div
+                    key={video.index}
+                    className="border border-zinc-800 rounded-lg overflow-hidden"
+                  >
+                    <div className="px-4 py-3 bg-zinc-800/50 flex items-center gap-3">
+                      <span className="w-7 h-7 rounded-full bg-indigo-950 text-indigo-400 text-xs font-bold flex items-center justify-center">
+                        {video.index + 1}
+                      </span>
+                      <span className="font-medium text-sm text-white">
+                        {video.title}
+                      </span>
+                    </div>
+                    {video.url !== "#" ? (
+                      <div className="video-protected aspect-video">
+                        <iframe
+                          src={video.url.replace("/share/", "/embed/")}
+                          className="w-full h-full"
+                          allowFullScreen
+                          allow="autoplay; fullscreen"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center h-48 bg-zinc-900 text-zinc-500 text-sm">
+                        Video URL not yet configured
+                      </div>
+                    )}
                   </div>
-                  {video.url !== "#" ? (
-                    <div className="video-protected aspect-video">
-                      <iframe
-                        src={video.url.replace("/share/", "/embed/")}
-                        className="w-full h-full"
-                        allowFullScreen
-                        allow="autoplay; fullscreen"
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center h-48 bg-zinc-50 text-zinc-400 text-sm">
-                      Video URL not yet configured
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ))}
           </div>
         )}
 
         {/* Document */}
         {resource.type === "document" && (
-          <div className="protected-content p-6 lg:p-8 prose prose-zinc prose-sm max-w-none">
+          <div className="protected-content p-6 lg:p-8 prose prose-invert prose-sm max-w-none">
             {resource.content?.split("\n").map((line, i) => {
               if (line.startsWith("# "))
                 return (
-                  <h1 key={i} className="text-xl font-bold mb-4">
+                  <h1 key={i} className="text-xl font-bold mb-4 text-white">
                     {line.slice(2)}
                   </h1>
                 );
               if (line.startsWith("## "))
                 return (
-                  <h2 key={i} className="text-lg font-semibold mb-3">
+                  <h2 key={i} className="text-lg font-semibold mb-3 text-white">
                     {line.slice(3)}
                   </h2>
                 );
               if (line === "") return <br key={i} />;
               return (
-                <p key={i} className="text-zinc-600 leading-relaxed">
+                <p key={i} className="text-zinc-400 leading-relaxed">
                   {line}
                 </p>
               );
@@ -134,11 +160,11 @@ export default async function ResourcePage({
         {/* Download */}
         {resource.type === "download" && (
           <div className="p-6 flex flex-col items-center justify-center text-center space-y-4 py-12">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center">
-              <Download className="w-8 h-8 text-indigo-500" />
+            <div className="w-16 h-16 rounded-2xl bg-indigo-950/50 flex items-center justify-center">
+              <Download className="w-8 h-8 text-indigo-400" />
             </div>
             <div>
-              <h2 className="font-semibold text-zinc-900 mb-1">
+              <h2 className="font-semibold text-white mb-1">
                 {resource.title}
               </h2>
               <p className="text-sm text-zinc-500">{resource.description}</p>
@@ -154,7 +180,7 @@ export default async function ResourcePage({
                 Download Resource
               </a>
             ) : (
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-zinc-500">
                 Download link not yet configured
               </p>
             )}
@@ -164,11 +190,11 @@ export default async function ResourcePage({
         {/* External Link */}
         {resource.type === "external_link" && (
           <div className="p-6 flex flex-col items-center justify-center text-center space-y-4 py-12">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center">
-              <ExternalLink className="w-8 h-8 text-indigo-500" />
+            <div className="w-16 h-16 rounded-2xl bg-indigo-950/50 flex items-center justify-center">
+              <ExternalLink className="w-8 h-8 text-indigo-400" />
             </div>
             <div>
-              <h2 className="font-semibold text-zinc-900 mb-1">
+              <h2 className="font-semibold text-white mb-1">
                 {resource.title}
               </h2>
               <p className="text-sm text-zinc-500">{resource.description}</p>
@@ -184,7 +210,7 @@ export default async function ResourcePage({
                 Open Link
               </a>
             ) : (
-              <p className="text-sm text-zinc-400">Link not yet configured</p>
+              <p className="text-sm text-zinc-500">Link not yet configured</p>
             )}
           </div>
         )}

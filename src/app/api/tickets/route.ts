@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { title, description, type, priority } = await request.json();
+  const { title, description, type, loomUrl, docUrl } = await request.json();
 
   if (!title || !description || !type) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -40,7 +40,9 @@ export async function POST(request: NextRequest) {
       title,
       description,
       type,
-      priority: priority || "normal",
+      priority: "normal",
+      loomUrl: loomUrl || null,
+      docUrl: docUrl || null,
       userId: user.id,
     },
   });

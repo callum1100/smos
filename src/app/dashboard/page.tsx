@@ -12,7 +12,7 @@ export default async function DashboardPage() {
     <div className="space-y-12">
       {/* Welcome header */}
       <div className="animate-fade-in">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-indigo-950 p-8 lg:p-10">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-indigo-950 p-8 lg:p-10 border border-zinc-800/50">
           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-[60px] translate-y-1/2 -translate-x-1/4" />
 
@@ -31,21 +31,21 @@ export default async function DashboardPage() {
       {/* Quick access: Contributor sections */}
       <div className="animate-fade-in animate-fade-in-delay-1">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-zinc-900">Sections</h2>
+          <h2 className="text-lg font-semibold text-white">Sections</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {contributors.map((c) => (
             <Link
               key={c.id}
               href={`/dashboard/section/${c.id}`}
-              className="card-premium p-5"
+              className="card-premium p-5 group"
             >
               <span className="text-3xl mb-3 block">{c.icon}</span>
-              <h3 className="font-semibold text-zinc-900 group-hover:text-indigo-600 transition-colors">
+              <h3 className="font-semibold text-white group-hover:text-indigo-400 transition-colors">
                 {c.name}
               </h3>
               <p className="text-sm text-zinc-500 mt-0.5">{c.role}</p>
-              <div className="mt-3 flex items-center text-sm text-zinc-400 group-hover:text-indigo-500 transition-colors">
+              <div className="mt-3 flex items-center text-sm text-zinc-500 group-hover:text-indigo-400 transition-colors">
                 <span>
                   {resources.filter((r) => r.contributor === c.id).length}{" "}
                   resources
@@ -60,12 +60,12 @@ export default async function DashboardPage() {
       {/* Browse by category */}
       <div className="animate-fade-in animate-fade-in-delay-2">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-zinc-900">
+          <h2 className="text-lg font-semibold text-white">
             Browse by Category
           </h2>
           <Link
             href="/dashboard/resources"
-            className="text-sm font-medium text-indigo-500 hover:text-indigo-600 transition-colors flex items-center gap-1"
+            className="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1"
           >
             View all
             <ArrowRight className="w-3.5 h-3.5" />
@@ -81,14 +81,14 @@ export default async function DashboardPage() {
               <Link
                 key={cat.id}
                 href={`/dashboard/resources?category=${cat.id}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-zinc-200/60 hover:border-zinc-300 hover:shadow-sm transition-all duration-200 group"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-200 group"
               >
                 <span className="text-xl">{cat.icon}</span>
                 <div>
-                  <p className="text-sm font-medium text-zinc-900 group-hover:text-indigo-600 transition-colors">
+                  <p className="text-sm font-medium text-white group-hover:text-indigo-400 transition-colors">
                     {cat.label}
                   </p>
-                  <p className="text-xs text-zinc-400">{count} items</p>
+                  <p className="text-xs text-zinc-500">{count} items</p>
                 </div>
               </Link>
             );
@@ -99,7 +99,7 @@ export default async function DashboardPage() {
       {/* Recent / Featured resources */}
       <div className="animate-fade-in animate-fade-in-delay-3">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold text-zinc-900">
+          <h2 className="text-lg font-semibold text-white">
             Featured Resources
           </h2>
         </div>

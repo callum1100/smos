@@ -26,7 +26,7 @@ export default async function SectionPage({
       <div>
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-900 transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-white transition-colors mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Dashboard
@@ -35,7 +35,7 @@ export default async function SectionPage({
         <div className="flex items-center gap-4">
           <span className="text-4xl">{contributor.icon}</span>
           <div>
-            <h1 className="text-2xl font-bold text-zinc-900">
+            <h1 className="text-2xl font-bold text-white">
               {contributor.name}&apos;s Resources
             </h1>
             <p className="text-zinc-500 text-sm">{contributor.role}</p>
@@ -51,7 +51,7 @@ export default async function SectionPage({
 
       {sectionResources.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-zinc-400">No resources in this section yet.</p>
+          <p className="text-zinc-500">No resources in this section yet.</p>
         </div>
       )}
     </div>
