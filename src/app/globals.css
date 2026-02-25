@@ -64,7 +64,13 @@
   }
 
   .textarea-premium {
-    @apply input-premium resize-none min-h-[140px];
+    @apply w-full px-4 py-2.5 text-sm rounded-lg
+           bg-white border border-zinc-200
+           placeholder:text-zinc-400
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/30
+           focus:border-indigo-400
+           transition-all duration-200
+           resize-none min-h-[140px];
   }
 
   .badge {
@@ -72,27 +78,33 @@
   }
 
   .badge-green {
-    @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200;
   }
 
   .badge-yellow {
-    @apply badge bg-amber-50 text-amber-700 ring-1 ring-amber-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-amber-50 text-amber-700 ring-1 ring-amber-200;
   }
 
   .badge-blue {
-    @apply badge bg-blue-50 text-blue-700 ring-1 ring-blue-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-blue-50 text-blue-700 ring-1 ring-blue-200;
   }
 
   .badge-red {
-    @apply badge bg-red-50 text-red-700 ring-1 ring-red-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-red-50 text-red-700 ring-1 ring-red-200;
   }
 
   .badge-purple {
-    @apply badge bg-purple-50 text-purple-700 ring-1 ring-purple-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-purple-50 text-purple-700 ring-1 ring-purple-200;
   }
 
   .badge-gray {
-    @apply badge bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200;
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full
+           bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200;
   }
 }
 
@@ -166,7 +178,10 @@
 
 /* Gradient text */
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #6366f1, #a855f7);
 }
 
 /* Glass effect */
