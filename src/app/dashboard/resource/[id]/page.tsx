@@ -83,6 +83,25 @@ export default async function ResourcePage({
                 </div>
               </div>
             )}
+            {/* Document content below video if present */}
+            {resource.content && (
+              <div className="p-6 lg:p-8 border-t border-zinc-800">
+                {resource.content.split("\n").map((line, i) => {
+                  if (line.startsWith("### "))
+                    return <h3 key={i} className="text-base font-semibold mb-2 mt-4 text-white">{line.slice(4)}</h3>;
+                  if (line.startsWith("## "))
+                    return <h2 key={i} className="text-lg font-semibold mb-3 mt-6 text-white">{line.slice(3)}</h2>;
+                  if (line.startsWith("# "))
+                    return <h1 key={i} className="text-xl font-bold mb-4 text-white">{line.slice(2)}</h1>;
+                  if (line.startsWith("- "))
+                    return <li key={i} className="text-zinc-400 leading-relaxed ml-4 list-disc">{line.slice(2)}</li>;
+                  if (line.startsWith("**") && line.endsWith("**"))
+                    return <p key={i} className="text-white font-semibold mt-3 mb-1">{line.slice(2, -2)}</p>;
+                  if (line === "") return <div key={i} className="h-2" />;
+                  return <p key={i} className="text-zinc-400 leading-relaxed">{line}</p>;
+                })}
+              </div>
+            )}
           </div>
         )}
 
