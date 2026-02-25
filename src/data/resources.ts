@@ -51,7 +51,7 @@ export interface ContributorInfo {
 export const contributors: ContributorInfo[] = [
   {
     id: "andres",
-    name: "Andres",
+    name: "Andreas",
     role: "Sales & Funnels",
     icon: "🎯",
     color: "bg-orange-50 border-orange-200 text-orange-700",
@@ -80,11 +80,11 @@ export const contributors: ContributorInfo[] = [
 ];
 
 export const resources: Resource[] = [
-  // ── Andres's Resources ───────────────────────────────────────────
+  // ── Andreas's Resources ───────────────────────────────────────────
   {
     id: "andres-calendar",
     title: "Weekly Calendar",
-    description: "Book your weekly call with Andres",
+    description: "Book your weekly call with Andreas",
     type: "external_link",
     contributor: "andres",
     category: "sales",
